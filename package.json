@@ -1,0 +1,23 @@
+{
+  "name": "new-years-game",
+  "version": "1.0.0",
+  "description": "Just a game that does a new years",
+  "main": "new-years-game.js",
+  "scripts": {
+    "start": "node new-years-game.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Etskh/new-years-game.git"
+  },
+  "author": "Etskh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Etskh/new-years-game/issues"
+  },
+  "homepage": "https://github.com/Etskh/new-years-game#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
