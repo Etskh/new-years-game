@@ -16,7 +16,6 @@
       <p>This is the summary</p>
       <p>
         <div id="fb-root"></div>
-        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
       </p>
     </div>
     <div id="scripts">
@@ -35,7 +34,16 @@
           
           FB.getLoginStatus(function(response) {
             if( response.status !== 'connected' ) {
-              FB.login();
+              FB.login(function(response) {
+                if (response.authResponse) {
+                 console.log('Welcome!  Fetching your information.... ');
+                 FB.api('/me', function(response) {
+                   console.log('Good to see you, ' + response.name + '.');
+                 });
+                } else {
+                 console.log('User cancelled login or did not fully authorize.');
+                }
+              });
             }
           });
         };
@@ -48,6 +56,11 @@
            fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'facebook-jssdk'));
          
+         /*
+        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>*/
+         function checkLoginState() {
+          console.log(arguments);
+         }
       </script>
     </div>
   </body>
