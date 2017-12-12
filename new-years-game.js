@@ -13,10 +13,10 @@ config.port = process.env.PORT || config.default_port;
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  const page = fs.readFileSync('templates/index.html');
+  const page = fs.readFileSync('./templates/index.html');
   res.send(page.toString());
 });
 
 app.listen(config.port, function() {
-    logger.info(`Starting app on port ${config.port}`);
+  console.log(`Starting app on port ${config.port}`);
 });
