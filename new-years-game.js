@@ -4,17 +4,17 @@ const express = require('express');
 const app = express();
 
 const config = {
-    name: 'portfolio',
-    default_port: 3000,
+  name: 'portfolio',
+  port: process.env.PORT || 3000,
+  appId: process.env.FACEBOOK_APP_ID || null,
 };
-config.port = process.env.PORT || config.default_port;
-
 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  const page = fs.readFileSync('./templates/index.html');
-  res.send(page.toString());
+  let page = fs.readFileSync('./templates/index.html').toString();
+  page = page.replace('{{appId}}', config.appId );
+  res.send(page);
 });
 
 app.listen(config.port, function() {
