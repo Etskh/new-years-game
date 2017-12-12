@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>New Years Game</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -15,8 +16,8 @@
     <div class="container">
       <h1>New Years Game</h1>
       <p>This is the summary</p>
-      <p id="login" style="display:none;">
-        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+      <p>
+        <div id="login" style="display:none;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
       </p>
     </div>
     <div id="scripts">
@@ -36,7 +37,7 @@
           FB.getLoginStatus(function(response) {
             console.log(response);
             if( response.status !== 'connected' ) {
-              document.getElementId('login').style.display = 'block';
+              document.getElementById('login').style.display = 'block';
             }
             else {
               checkLoginState(response);
@@ -54,7 +55,7 @@
          
          function checkLoginState(response) {
           if (response.authResponse) {
-            document.getElementId('login').style.display = 'none';
+            document.getElementById('login').style.display = 'none';
             console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', function(response) {
               console.log('Good to see you, ' + response.name + '.');
