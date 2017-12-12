@@ -1,6 +1,13 @@
 const fs = require('fs');
 const express = require('express');
+
 const app = express();
+
+const config = {
+    name: 'portfolio',
+    default_port: 3000,
+};
+config.port = process.env.PORT || config.default_port;
 
 
 app.use(express.static('public'));
@@ -10,6 +17,6 @@ app.get('/', (req, res) => {
   res.send(page.toString());
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
+app.listen(config.port, function() {
+    logger.info(`Starting app on port ${config.port}`);
 });
