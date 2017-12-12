@@ -60,7 +60,7 @@
             FB.api('/me', function(response) {
               console.log('Good to see you, ' + response.name + '.');
               console.log(response);
-              FB.api('/me/posts', function(response) {
+              FB.api(`/${response.id}/posts`, function(response) {
                 console.log(response);
               });
             });
