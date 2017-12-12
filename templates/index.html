@@ -24,11 +24,14 @@
             appId      : '{{appId}}',
             cookie     : true,
             xfbml      : true,
-            version    : '{latest-api-version}'
+            version    : '2.11'
           });
             
           FB.AppEvents.logPageView();   
-            
+          
+          FB.getLoginStatus(function(response) {
+            console.log(response);
+          });
         };
 
         (function(d, s, id){
@@ -38,6 +41,7 @@
            js.src = "https://connect.facebook.net/en_US/sdk.js";
            fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'facebook-jssdk'));
+         
       </script>
     </div>
   </body>
