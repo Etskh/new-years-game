@@ -13,23 +13,32 @@
 
   <body>
     <div id="fb-root"></div>
+    <div id="wrong-server" style="display:none;color:#900;">
+      <h2>You need to test this on the deployed site</h2>
+    </div>
     <div class="container">
       <h1>New Years Game</h1>
       <p>This is the summary</p>
       <p>
         <div id="login" style="display:none;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
       </p>
+      <p id="post-list">Your posts will appear here once you log on</p>
     </div>
     <div id="scripts">
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
       <script>
         window.fbAsyncInit = function() {
+          if( window.location.href.indexOf('localhost') !== -1 ) {
+            document.getElementById('wrong-server').style.display = 'block';
+            return;
+          }
+          console.log('initialising facebook with app {{appId}}');
           FB.init({
             appId      : '{{appId}}',
             cookie     : true,
             xfbml      : true,
-            version    : 'v2.11'
+            version    : 'v2.11',
           });
             
           FB.AppEvents.logPageView();   
