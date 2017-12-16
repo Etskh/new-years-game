@@ -33,16 +33,15 @@
             document.getElementById('wrong-server').style.display = 'block';
             return;
           }
-          console.log('initialising facebook with app {{appId}}');
           FB.init({
             appId      : '{{appId}}',
             cookie     : true,
             xfbml      : true,
             version    : 'v2.11',
           });
-            
-          FB.AppEvents.logPageView();   
-          
+
+          FB.AppEvents.logPageView();
+
           FB.getLoginStatus(function(response) {
             console.log(response);
             if( response.status !== 'connected' ) {
@@ -61,7 +60,7 @@
            js.src = "https://connect.facebook.net/en_US/sdk.js";
            fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'facebook-jssdk'));
-         
+
          function checkLoginState(response) {
           if (response.authResponse) {
             document.getElementById('login').style.display = 'none';
