@@ -22,6 +22,11 @@ app.get('/privacy', (req, res) => {
   res.send(page);
 });
 
+app.get('/terms-of-service', (req, res) => {
+  let page = fs.readFileSync('./templates/terms.html').toString();
+  res.send(page);
+});
+
 app.listen(config.port, function() {
   console.log(`Starting app on port ${config.port}`);
 });
