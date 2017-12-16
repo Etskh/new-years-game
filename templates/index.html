@@ -1,83 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>New Years Game</title>
-    <link rel=
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="icon" type="image/png" href="favicon64.png">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body>
-    <div id="fb-root"></div>
-    <div id="wrong-server" style="display:none;color:#900;">
-      <h2>You need to test this on the deployed site</h2>
-    </div>
-    <div class="container">
-      <h1>New Years Game</h1>
-      <p>This is the summary</p>
-      <p>
-        <div id="login" style="display:none;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-      </p>
-      <p id="post-list">Your posts will appear here once you log on</p>
-    </div>
-    <div id="scripts">
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-      <script>
-        window.fbAsyncInit = function() {
-          if( window.location.href.indexOf('localhost') !== -1 ) {
-            document.getElementById('wrong-server').style.display = 'block';
-            return;
-          }
-          FB.init({
-            appId      : '{{appId}}',
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v2.11',
-          });
-
-          FB.AppEvents.logPageView();
-
-          FB.getLoginStatus(function(response) {
-            console.log(response);
-            if( response.status !== 'connected' ) {
-              document.getElementById('login').style.display = 'block';
-            }
-            else {
-              checkLoginState(response);
-            }
-          });
-        };
-
-        (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "https://connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-         }(document, 'script', 'facebook-jssdk'));
-
-         function checkLoginState(response) {
-          if (response.authResponse) {
-            document.getElementById('login').style.display = 'none';
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-              console.log('Good to see you, ' + response.name + '.');
-              console.log(response);
-              FB.api(`/${response.id}/posts`, function(response) {
-                console.log(response);
+    <head>
+        <title>New Years Game</title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="icon" type="image/png" href="favicon64.png">
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+        body {
+            background-color: #403c6d;
+        }
+        header.page-header {
+            color: #FFF;
+            padding-top: 50px;
+        }
+        footer.page-footer {
+            background-color: transparent;
+        }
+        main {
+            padding-top: 30px;
+            padding-bottom: 50px;
+            background: white;
+            color: black;
+        }
+        </style>
+    </head>
+    <body>
+        <header class="page-header">
+            <div id="wrong-server" style="display:none;color:#900;">
+                <h2>You need to test this on the deployed site</h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <h1>New Years Game</h1>
+                    <p class="flow-text">New years game for us to play</p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <p class="flow-text">This is the summary</p>
+                <p>
+                    <div id="login" style="display:none;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                </p>
+                <p id="post-list">Your posts will appear here once you log on</p>
+                <div id="fb-root"></div>
+            </div>
+        </main>
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Boring Legal Stuff</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="/privacy">Privacy policy</a></li>
+                        </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="right">No copyright. Go ahead. Copy this website. See if I care.</div>
+                </div>
+            </div>
+        </div>
+        <div id="scripts">
+          <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+          <script>
+            window.fbAsyncInit = function() {
+              if( window.location.href.indexOf('localhost') !== -1 ) {
+                document.getElementById('wrong-server').style.display = 'block';
+                return;
+              }
+              FB.init({
+                appId      : '{{appId}}',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v2.11',
               });
-            });
-          } else {
-            console.log('User cancelled login or did not fully authorize.');
-          }
-         }
-      </script>
-    </div>
-  </body>
+
+              FB.AppEvents.logPageView();
+
+              FB.getLoginStatus(function(response) {
+                console.log(response);
+                if( response.status !== 'connected' ) {
+                  document.getElementById('login').style.display = 'block';
+                }
+                else {
+                  checkLoginState(response);
+                }
+              });
+            };
+
+            (function(d, s, id){
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) {return;}
+               js = d.createElement(s); js.id = id;
+               js.src = "https://connect.facebook.net/en_US/sdk.js";
+               fjs.parentNode.insertBefore(js, fjs);
+             }(document, 'script', 'facebook-jssdk'));
+
+             function checkLoginState(response) {
+              if (response.authResponse) {
+                document.getElementById('login').style.display = 'none';
+                FB.api('/me', function(response) {
+                  console.log(response);
+                  FB.api(`/${response.id}/feed`, function(response) {
+                    console.log(response);
+                  });
+                });
+              } else {
+                console.log('User cancelled login or did not fully authorize.');
+              }
+             }
+          </script>
+        </div>
+    </body>
 </html>
